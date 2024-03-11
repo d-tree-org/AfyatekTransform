@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: afyatek_data
+    description: "Raw data from the ETL"
+    database: afyatekdb
+    schema: public
+    tables:
+      - name: anc_addo_visit
+        description: "ANC Addo patients resources."
