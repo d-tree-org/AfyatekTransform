@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: afyatek_data
+    description: "Raw data from the ETL"
+    database: afyatekdb
+    schema: public
+    tables:
+      - name: anc_addo_visit
+        description: "ANC Addo patients resources."
+      - name: pnc_addo_visit
+        description: "PNC Addo visits events data"
+      - name: child_addo_visit
+        description: "Child Addo visits events data"
+      - name: adolescent_addo_visit
+        description: "Adolescents Addo visits event data"
+        
