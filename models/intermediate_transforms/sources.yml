@@ -14,4 +14,9 @@ sources:
         description: "Child Addo visits events data"
       - name: adolescent_addo_visit
         description: "Adolescents Addo visits event data"
-        
+      - name: anc_home_visit
+        description: "Anc Home Visits event data"
+      - name: pnc_home_visit
+        description: "PNC Home Visits event data"
+      - name: child_home_visit
+        description: "Child Home Visits event data"

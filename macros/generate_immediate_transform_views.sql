@@ -1,4 +1,4 @@
-{% macro generate_immediate_transform_views(table_name) %}
+{%- macro generate_immediate_transform_views(table_name) -%}
 SELECT
     g.id,
     g.base_entity_id,
