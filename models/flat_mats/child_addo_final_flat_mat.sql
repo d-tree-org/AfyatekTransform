@@ -20,7 +20,8 @@
     {"name":"addo_medication_to_give", "type": "text"},
     {"name":"addo_visit_date", "type": "text"},
     {"name":"child_conditions", "type": "text"},
-    {"name":"danger_signs_present_child", "type": "text"}
+    {"name":"danger_signs_present_child", "type": "text"}, 
+    {"name": "encounter_type", "type":"text" }
     ] 
 -%}
 SELECT
