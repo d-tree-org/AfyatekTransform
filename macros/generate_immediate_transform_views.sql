@@ -1,4 +1,6 @@
-SELECT g.id,
+{%- macro generate_immediate_transform_views(table_name) -%}
+SELECT
+    g.id,
     g.base_entity_id,
     g.entity_type,
     g.event_date,
@@ -18,5 +20,6 @@ SELECT g.id,
     observations.value -> 'fieldType'::text AS fieldtype,
     observations.value -> 'parentCode'::text AS parentcode,
     observations.value -> 'fieldDataType'::text AS fielddatatype
-   FROM {{ source('afyatek_data', 'anc_addo_visit') }} g,
-    LATERAL jsonb_array_elements(g.obs) observations(value)
+FROM {{ source('afyatek_data', table_name) }} AS g,
+    LATERAL jsonb_array_elements(g.obs) AS observations (value)
+{% endmacro %}
