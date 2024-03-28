@@ -1,4 +1,4 @@
-WITH anc_home_visit_meds AS (
+WITH chw_combined_meds AS (
     SELECT
         ahv.base_entity_id,
         ahv.event_date,
@@ -11,19 +11,19 @@ WITH anc_home_visit_meds AS (
         ahv.id,
         ahv.unique_id,
         ahv.using_medication,
-        ahv.medication_currently_using_anc,
+        ahv.medication_currently_using_anc AS medication_used_currently,
         ahv.source_medicine,
-        ahv.source_selection_medicine,
         ahv.not_get_all_meds_reason,
         ahv.not_get_all_meds_reason_other,
         ahv.expensive_medication_list,
         ahv.out_of_stock_medication_list,
         ahv.other_reason_medication_list,
-        ahv.get_all_meds
-    FROM {{ ref('anc_home_visit_flat_mat') }} AS ahv WHERE date_part('year', ahv.event_date) >= 2024
-),
-
-pnc_home_visit_meds AS (
+        ahv.get_all_meds,
+        'anc' AS client_type,
+        ahv.source_selection_medicine
+    FROM {{ ref('anc_home_visit_flat_mat') }} AS ahv
+    WHERE ahv.event_date >= '2024-01-01'
+    UNION ALL
     SELECT
         phv.base_entity_id,
         phv.event_date,
@@ -36,19 +36,19 @@ pnc_home_visit_meds AS (
         phv.id,
         phv.unique_id,
         phv.using_medication,
-        phv.medication_currently_using_pnc,
+        phv.medication_currently_using_pnc AS medication_used_currently,
         phv.source_medicine,
-        phv.source_selection_medicine,
         phv.not_get_all_meds_reason,
         phv.not_get_all_meds_reason_other,
         phv.expensive_medication_list,
         phv.out_of_stock_medication_list,
         phv.other_reason_medication_list,
-        phv.get_all_meds
-    FROM {{ ref('pnc_home_visit_flat_mat') }} AS phv WHERE date_part('year', phv.event_date) >= 2024
-),
-
-child_home_visit_meds AS (
+        phv.get_all_meds,
+        'pnc' AS client_type,
+        phv.source_selection_medicine
+    FROM {{ ref('pnc_home_visit_flat_mat') }} AS phv
+    WHERE phv.event_date >= '2024-01-01'
+    UNION ALL
     SELECT
         chv.base_entity_id,
         chv.event_date,
@@ -61,7 +61,7 @@ child_home_visit_meds AS (
         chv.id,
         chv.unique_id,
         chv.using_medication,
-        chv.medication_currently_using_child,
+        chv.medication_currently_using_child AS medication_used_currently,
         chv.source_medicine,
         chv.not_get_all_meds_reason,
         chv.not_get_all_meds_reason_other,
@@ -69,6 +69,7 @@ child_home_visit_meds AS (
         chv.out_of_stock_medication_list,
         chv.other_reason_medication_list,
         chv.get_all_meds,
+        'child' AS client_type,
         CASE
             WHEN chv.source_medicine = 'health_facility' THEN chv.source_selection_reason_hf
             WHEN chv.source_medicine = 'addo' THEN chv.source_selection_reason_addo
@@ -77,17 +78,15 @@ child_home_visit_meds AS (
             ELSE null::text
         END AS source_selection_medicine
     FROM {{ ref('child_home_visit_flat_mat') }} AS chv WHERE chv.event_date >= '2024-01-01'
-),
-
-combined_home_visit AS (
-    SELECT *
-    FROM anc_home_visit_meds
-    UNION ALL
-    SELECT *
-    FROM pnc_home_visit_meds
-    UNION ALL
-    SELECT *
-    FROM child_home_visit_meds
 )
 
-SELECT * FROM combined_home_visit
+SELECT
+    chw_combined_meds.*,
+    ld.ward_id,
+    ld.ward_name,
+    ld.district_id,
+    ld.district_name
+FROM chw_combined_meds
+LEFT JOIN
+    {{ source('location_data', 'openmrs_location_mapping_final') }} AS ld
+    ON chw_combined_meds.location_id = ld.location_id
