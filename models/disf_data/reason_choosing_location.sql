@@ -16,7 +16,7 @@ SELECT
     ) AS source_of_meds,
     count(*) AS count
 FROM
-    afyatek_disf_data.chw_home_visit_meds AS ahvfm
+    {{ ref('chw_home_visit_meds') }} AS ahvfm
 LEFT JOIN translations.translations AS t
     ON
         ahvfm.source_medicine = t.swahili
