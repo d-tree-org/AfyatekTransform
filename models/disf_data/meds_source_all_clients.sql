@@ -11,10 +11,10 @@ SELECT
 FROM
     {{ ref('chw_home_visit_meds') }} AS chvm
 LEFT JOIN translations.translations AS t
-    ON
-        chvm.source_medicine = t.swahili
+    ON chvm.source_medicine = t.swahili
 WHERE
     chvm.event_date >= '2024-03-01'
+    AND coalesce(t.english, chvm.source_medicine) IS NOT null
 GROUP BY
     coalesce(t.english, chvm.source_medicine),
     chvm.location_id,

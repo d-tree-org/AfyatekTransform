@@ -1,0 +1,1 @@
+{{ generate_immediate_transform_views('referral_follow_up_visit') }}
