@@ -22,7 +22,7 @@ WITH chw_combined_meds AS (
         'anc' AS client_type,
         ahv.source_selection_medicine
     FROM {{ ref('anc_home_visit_flat_mat') }} AS ahv
-    WHERE ahv.event_date >= '2024-01-01'
+    WHERE ahv.event_date >= '2024-03-01'
     UNION ALL
     SELECT
         phv.base_entity_id,
@@ -47,7 +47,7 @@ WITH chw_combined_meds AS (
         'pnc' AS client_type,
         phv.source_selection_medicine
     FROM {{ ref('pnc_home_visit_flat_mat') }} AS phv
-    WHERE phv.event_date >= '2024-01-01'
+    WHERE phv.event_date >= '2024-03-01'
     UNION ALL
     SELECT
         chv.base_entity_id,
@@ -77,7 +77,7 @@ WITH chw_combined_meds AS (
             WHEN chv.source_medicine = 'other_commodities_shop' THEN chv.source_selection_reason_commodities_shop
             ELSE null::text
         END AS source_selection_medicine
-    FROM {{ ref('child_home_visit_flat_mat') }} AS chv WHERE chv.event_date >= '2024-01-01'
+    FROM {{ ref('child_home_visit_flat_mat') }} AS chv WHERE chv.event_date >= '2024-03-01'
 )
 
 SELECT

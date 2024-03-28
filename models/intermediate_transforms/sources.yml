@@ -20,3 +20,5 @@ sources:
         description: "PNC Home Visits event data"
       - name: child_home_visit
         description: "Child Home Visits event data"
+      - name: referral_follow_up_visit
+        description: "Child Home Visits event data"
