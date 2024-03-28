@@ -1,5 +1,5 @@
 {%- set anc_fields = [
-  {"name": "using_medication", "type": "text"},
+  {"name": "using_medication", "type": "yes_no"},
   {"name": "medication_currently_using_anc", "type": "text"},
   {"name": "source_medicine", "type": "text"},
   {"name": "source_selection_medicine", "type": "text"},
@@ -8,7 +8,7 @@
   {"name": "expensive_medication_list", "type": "text"},
   {"name": "out_of_stock_medication_list", "type": "text"},
   {"name": "other_reason_medication_list", "type": "text"},
-  {"name": "get_all_meds", "type": "text"},
+  {"name": "get_all_meds", "type": "yes_no"},
   {"name": "danger_signs_present", "type": "text"},
   {"name": "minor_illnesses", "type": "text"},
   {"name": "save_n_link", "type": "text"},
