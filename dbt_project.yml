@@ -39,6 +39,9 @@ models:
     flat_mats:
       +schema: flat_mats
       +materialized: materialized_view
+    visits:
+      +schema: visits
+      +materialized: materialized_view
     disf_data:
       +schema: disf_data
       +materialized: materialized_view
