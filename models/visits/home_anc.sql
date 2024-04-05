@@ -1,6 +1,6 @@
 {%- set fields = [ 
     {"name": "using_medication", "type": "boolean", "translate": "true"  },
-    {"name": "medication_currently_using_anc", "type": "string_agg","rename":"medication_used_currently"},
+    {"name": "medication_currently_using_anc", "type": "options","rename":"medication_used_currently"},
     {"name": "source_medicine"},
     {"name": "source_selection_medicine"},
     {"name": "not_get_all_meds_reason"},
@@ -9,7 +9,7 @@
     {"name": "out_of_stock_medication_list"},
     {"name": "other_reason_medication_list"},
     {"name": "get_all_meds", "type": "boolean", "translate": "true"},
-    {"name": "danger_signs_present", "type": "string_agg"},
+    {"name": "danger_signs_present", "type": "options"},
     {"name": "minor_illnesses"},
     {"name": "save_n_link"},
     {"name": "save_n_refer"},

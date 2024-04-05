@@ -1,5 +1,5 @@
 {% set fields = [
-        {"name": "danger_signs_present_child", "type": "string_agg"},
+        {"name": "danger_signs_present_child", "type": "options"},
         {"name": "minor_illness_present_child"},
         {"name": "save_n_link"},
         {"name": "home_visit_date"},
@@ -11,7 +11,7 @@
         {"name": "fam_llin_1m5yr"},
         {"name": "llin_2days_1m5yr"},
         {"name": "using_medication", "type": "boolean", "translate": "true"},
-        {"name": "medication_currently_using_child","rename":"medication_used_currently"},
+        {"name": "medication_currently_using_child","type":"options","rename":"medication_used_currently"},
         {"name": "source_medicine"},
         {"name": "source_selection_reason_hf"},
         {"name": "source_selection_reason_addo"},

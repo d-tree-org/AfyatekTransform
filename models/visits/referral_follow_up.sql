@@ -3,7 +3,7 @@
     {"name": "visit_hf"},
     {"name": "services_hf"},
     {"name": "get_all_meds"},
-    {"name": "not_get_all_meds_reason", "type": "string_agg"},
+    {"name": "not_get_all_meds_reason", "type": "options"},
     {"name": "not_get_all_meds_reason_other"},
     {"name": "reminder_toaster"},
     {"name": "noservices_reason"},

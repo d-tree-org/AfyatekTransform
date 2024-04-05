@@ -18,9 +18,9 @@
         "type": "boolean",
         "translate": "true"
     },
-    {"name": "danger_signs_captured" },
-    {"name": "medications_selected" },
-    {"name": "medicine_dispensed" },
+    {"name": "danger_signs_captured","translate":"true", "type":"tag_delimited" },
+    {"name": "medications_selected", "translate":"true", "type":"tag_delimited" },
+    {"name": "medicine_dispensed", "translate":"true", "type":"options" },
     {"name": "minor_illnesses" },
     {
         "name": "pregnant_woman_present",
@@ -29,7 +29,7 @@
         "translate": "true",
     },
     {"name": "client_commodities_dispensed" },
-    {"name": "addo_medication_to_give" },
+    {"name": "addo_medication_to_give","translate":"true", "type":"tag_delimited" },
     {"name": "addo_visit_date" },
     {"name": "linkage_recommendation" },
     {"name": "encounter_type" }

@@ -1,6 +1,6 @@
 {% set fields = [
   {"name": "couselling_pnc"},
-  {"name": "danger_signs_present_mama", "type": "string_agg"},
+  {"name": "danger_signs_present_mama", "type": "options"},
   {"name": "danger_signs_captured_sw"},
   {"name": "minor_illness_present_mama"},
   {"name": "save"},
@@ -20,7 +20,7 @@
   {"name": "llin_condition"},
   {"name": "fp_counseling"},
   {"name": "using_medication", "type": "boolean", "translate":"true"},
-  {"name": "medication_currently_using_pnc", "type": "string_agg","rename":"medication_used_currently"},
+  {"name": "medication_currently_using_pnc", "type": "options","rename":"medication_used_currently"},
   {"name": "source_medicine"},
   {"name": "source_selection_medicine"},
   {"name": "get_all_meds", "type": "boolean", "translate": "true"},

@@ -16,21 +16,25 @@
         "type": "boolean",
         "translate": "true"
     },
-    {"name":"addo_actions"},
-    {"name":"danger_signs_captured"},
+    {"name":"addo_actions","translate":"true", "type":"tag_delimited" },
+    {"name":"danger_signs_captured","translate":"true", "type":"tag_delimited" },
     {
         "name":"child_present",
         "rename":"is_child_present",
         "type": "boolean",
         "translate": "true"
     },
-    {"name":"medications_selected"},
-    {"name":"medicine_dispensed", "type": "string_agg"},
+    {"name":"medications_selected","translate":"true", "type":"tag_delimited"},
+    {"name":"medicine_dispensed", "type": "options"},
     {"name":"linkage_recommendation"},
-    {"name":"addo_medication_to_give"},
+    {"name":"addo_medication_to_give","translate":"true", "type":"tag_delimited"},
     {"name":"addo_visit_date"},
     {"name":"child_conditions"},
-    {"name":"danger_signs_present_child", "type": "string_agg"}, 
+    {
+        "name":"danger_signs_present_child"
+        ,"translate":"true"
+        ,"type": "options"
+    }, 
     {"name": "encounter_type", "type":"text" }
     ] 
 -%}
