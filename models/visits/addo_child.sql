@@ -24,18 +24,18 @@
         "type": "boolean",
         "translate": "true"
     },
-    {"name":"medications_selected","translate":"true", "type":"tag_delimited"},
+    {"name":"medications_selected", "translate":"true", "type":"tag_delimited"},
     {"name":"medicine_dispensed", "type": "options"},
     {"name":"linkage_recommendation"},
     {"name":"addo_medication_to_give","translate":"true", "type":"tag_delimited"},
     {"name":"addo_visit_date"},
-    {"name":"child_conditions"},
+    {"name":"child_conditions","type":"comma_separated_string"},
     {
         "name":"danger_signs_present_child"
         ,"translate":"true"
         ,"type": "options"
     }, 
-    {"name": "encounter_type", "type":"text" }
+    {"name": "encounter_type", "type":"options" }
     ] 
 -%}
 {{- flattern_obs('child_addo_visit',fields) -}}

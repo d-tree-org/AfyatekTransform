@@ -32,7 +32,7 @@
   { "name": "simserial" },
   { "name": "subscriberid" },
   { "name": "service_provider" },
-  { "name": "encounter_type", "type": "text" }
+  { "name": "encounter_type", "type": "options" }
 ]
   -%}
 {{- flattern_obs('pnc_addo_visit',fields) -}}

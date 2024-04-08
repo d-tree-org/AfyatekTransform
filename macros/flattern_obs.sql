@@ -1,18 +1,15 @@
 {%- macro flattern_obs(table_name,fields) %}
+    {%- set columns=['base_entity_id','event_date','team','child_location_id','location_id','provider_id',
+    'date_created'] -%}
 WITH translation AS (
     SELECT json_object_agg(lower(swahili), english) AS "get" FROM translations.addo
 ),
 
 value_cte AS(
     SELECT
-        tb.base_entity_id,
-        tb.event_date::TIMESTAMP,
-        tb.team,
-        tb.child_location_id,
-        tb.location_id,
-        tb.provider_id,
-        tb.server_version,
-        tb.date_created::TIMESTAMP,
+    {%- for column in columns %}
+        tb.{{ column ~ ('::DATE' if 'date' in column ) }},
+    {%- endfor %}
         tb.id,
         coalesce( obs._value -> 'humanReadableValues' ->> 0, obs._value -> 'values' ->> 0) AS _val,
         obs._value ->> 'formSubmissionField' AS _col 
@@ -21,20 +18,12 @@ value_cte AS(
 )
 
 SELECT
-    obs.base_entity_id,
-    obs.event_date::TIMESTAMP,
-    obs.team,
-    obs.child_location_id,
-    obs.location_id,
-    obs.provider_id,
-    obs.server_version,
-    obs.date_created::TIMESTAMP,
-{%- for field in fields %}
-    {{ obs_column(field) }}
-{%- endfor %}
-    obs.id
+    {%- for field in fields %}
+        {{ obs_column(field) }}
+    {%- endfor %}
+    {{ '\tobs.' ~ ',\n\tobs.'.join(columns) }},
+    array_agg(distinct obs.id) AS event_ids
 FROM value_cte AS obs
     INNER JOIN translation AS dict ON TRUE
-GROUP BY obs.base_entity_id, obs.event_date, obs.team, obs.child_location_id,
-    obs.location_id, obs.provider_id, obs.server_version, obs.date_created, obs.id
+GROUP BY {{ 'obs.' ~ ', obs.'.join(columns) }}
 {%- endmacro %}

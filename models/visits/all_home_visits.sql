@@ -1,3 +1,11 @@
+{{- config(
+    materialized="materialized_view",
+    on_configuration_change="apply",
+    indexes=[{
+        "columns": ['location_id','ward_id','district_id','ward_name','district_name','event_date','base_entity_id','provider_id'],
+            "unique": true, 'type': 'btree' }]
+) -}}
+
 SELECT
     loc.ward_id,
     loc.ward_name,
@@ -9,9 +17,7 @@ SELECT
     coalesce(anc.location_id, pnc.location_id, child.location_id) AS location_id,
     coalesce(anc.child_location_id, pnc.child_location_id, child.child_location_id) AS child_location_id,
     coalesce(anc.provider_id, pnc.provider_id, child.provider_id) AS provider_id,
-    coalesce(anc.server_version, pnc.server_version, child.server_version) AS server_version,
     coalesce(anc.date_created, pnc.date_created, child.date_created) AS date_created,
-    coalesce(anc.id, pnc.id, child.id) AS id,
     coalesce(anc.using_medication, pnc.using_medication, child.using_medication) AS using_medication,
     coalesce(
         anc.medication_used_currently, pnc.medication_used_currently, child.medication_used_currently
@@ -38,23 +44,23 @@ SELECT
         WHEN child.source_medicine = 'addo' THEN child.source_selection_reason_addo
         WHEN child.source_medicine = 'phamarcy' THEN child.source_selection_reason_pharmacy
         WHEN child.source_medicine = 'other_commodities_shop' THEN child.source_selection_reason_commodities_shop
-        WHEN anc.id IS NOT null THEN anc.source_selection_medicine
-        WHEN pnc.id IS NOT null THEN pnc.source_selection_medicine
+        WHEN anc.base_entity_id IS NOT null THEN anc.source_selection_medicine
+        WHEN pnc.base_entity_id IS NOT null THEN pnc.source_selection_medicine
     END AS source_selection_medicine,
     CASE
-        WHEN anc.id IS NOT null THEN 'anc'
-        WHEN pnc.id IS NOT null THEN 'pnc'
-        WHEN child.id IS NOT null THEN 'child'
-    END AS client_type
+        WHEN anc.base_entity_id IS NOT null THEN 'anc'
+        WHEN pnc.base_entity_id IS NOT null THEN 'pnc'
+        WHEN child.base_entity_id IS NOT null THEN 'child'
+    END AS client_type,
+    coalesce(anc.event_ids, pnc.event_ids, child.event_ids) AS event_ids
 
 FROM {{ ref('home_anc') }} AS anc
 FULL JOIN {{ ref('home_pnc') }} AS pnc
-    ON anc.id = pnc.id
+    ON anc.event_ids = pnc.event_ids
 FULL JOIN {{ ref('home_child') }} AS child
-    ON pnc.id = child.id
-
+    ON anc.event_ids = child.event_ids
 LEFT JOIN
     {{ source('location_data', 'openmrs_location_mapping_final') }} AS loc
     ON loc.location_id = coalesce(anc.location_id, pnc.location_id, child.location_id)
 WHERE
-    coalesce(anc.event_date, pnc.event_date, child.event_date) >= '2024-03-01'::date
+    coalesce(anc.event_date, pnc.event_date, child.event_date) >= '2022-01-01'::date
