@@ -15,6 +15,8 @@ value_cte AS(
         obs._value ->> 'formSubmissionField' AS _col 
     FROM {{ source('afyatek_data', table_name) }} AS tb,
     LATERAL  jsonb_array_elements(tb.obs) AS obs (_value)
+    WHERE
+        tb.event_date >= '2024-03-01'::date
 )
 
 SELECT
