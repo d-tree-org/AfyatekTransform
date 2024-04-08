@@ -102,4 +102,4 @@ LEFT JOIN
     {{ source('location_data', 'openmrs_location_mapping_final') }} AS loc
     ON loc.location_id = coalesce(anc.location_id, pnc.location_id, child.location_id)
 WHERE
-    coalesce(anc.event_date, pnc.event_date, child.event_date) >= '2022-01-01'::date
+    coalesce(anc.event_date, pnc.event_date, child.event_date) >= '2024-03-01'::date
