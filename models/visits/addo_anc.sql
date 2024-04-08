@@ -11,6 +11,7 @@
     {"name": "referral_status" },
     {"name": "save_n_refer" },
     {"name": "dispense_options" },
+    {"name": "not_dispensed_meds", "type":"options" },
     {"name": "select_facility" },
     {
         "name": "all_meds_dispensed",

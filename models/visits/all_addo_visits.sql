@@ -41,6 +41,12 @@ SELECT
     coalesce(adolescent.adolescent_condition_present) AS adolescent_condition_present,
     coalesce(adolescent.adolescent_condition_present_other) AS adolescent_condition_present_other,
     coalesce(
+        pnc.not_dispensed_meds,
+        child.not_dispensed_meds,
+        anc.not_dispensed_meds,
+        adolescent.not_dispensed_meds
+    ) AS not_dispensed_meds,
+    coalesce(
         pnc.is_all_medicine_dispensed,
         child.is_all_medicine_dispensed,
         anc.is_all_medicine_dispensed,

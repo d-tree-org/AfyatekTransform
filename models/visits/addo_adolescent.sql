@@ -30,7 +30,16 @@
     {"name": "addo_referral_options"},
     {"name": "addo_visit_date"},
     {"name": "adolescent_condition_present"},
-    {"name": "linkage_recommendation"}
+    {"name": "linkage_recommendation"},
+
+    { "name":"no_medicine_selected"},
+    { "name":"medication_description"},
+    { "name":"not_dispensed_meds","type":"options"},
+    {
+        "name":"reason_not_dispensed_meds",
+        "translate":"true",
+        "type":"options"
+    }
     ] 
  -%}
 {{- flattern_obs('adolescent_addo_visit',fields) -}}

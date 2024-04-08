@@ -7,6 +7,7 @@
   { "name": "danger_signs_captured" ,"translate":"true", "type":"tag_delimited" },
   { "name": "save_n_refer" },
   { "name": "client_commodities_dispensed" },
+  {"name": "not_dispensed_meds", "type":"options" },
   { "name": "all_meds_dispensed",
     "type": "boolean",
     "translate": "true",

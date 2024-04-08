@@ -9,6 +9,7 @@
     {"name":"save_n_refer"},
     {"name":"referral_status"},
     {"name":"dispense_options"},
+    {"name": "not_dispensed_meds", "type":"options" },
     {"name":"condition_urgency"},
     {
         "name":"all_meds_dispensed",
