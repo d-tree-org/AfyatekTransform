@@ -39,7 +39,8 @@
         "name":"reason_not_dispensed_meds",
         "translate":"true",
         "type":"options"
-    }
+    },
+    {"name": "encounter_type","type":"options" }
     ] 
  -%}
 {{- flattern_obs('adolescent_addo_visit',fields) -}}
