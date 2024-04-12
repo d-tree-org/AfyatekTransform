@@ -39,6 +39,13 @@ models:
     flat_mats:
       +schema: flat_mats
       +materialized: materialized_view
+      +indexes:
+        - columns: ['base_entity_id','event_date','location_id','provider_id','date_created']
+          type: btree
+    visits:
+      +schema: visits
+      +materialized: materialized_view
+      +on_configuration_change: apply
     disf_data:
       +schema: disf_data
       +materialized: materialized_view
