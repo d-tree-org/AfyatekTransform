@@ -22,14 +22,19 @@ SELECT
     pnc.medication_description,
     pnc.is_mother_present,
     anc.is_pregnant_woman_present,
-    coalesce(anc.base_entity_id, pnc.base_entity_id, child.base_entity_id) AS base_entity_id,
-    coalesce(anc.event_date, pnc.event_date, child.event_date) AS event_date,
-    coalesce(anc.team, pnc.team, child.team) AS team,
-    coalesce(anc.location_id, pnc.location_id, child.location_id) AS location_id,
-    coalesce(anc.child_location_id, pnc.child_location_id, child.child_location_id) AS child_location_id,
-    coalesce(anc.provider_id, pnc.provider_id, child.provider_id) AS provider_id,
-    coalesce(anc.date_created, pnc.date_created, child.date_created) AS date_created,
-    coalesce(anc.event_ids, pnc.event_ids, child.event_ids) AS event_ids,
+    coalesce(anc.base_entity_id, pnc.base_entity_id, child.base_entity_id, adolescent.base_entity_id) AS base_entity_id,
+    coalesce(anc.event_date, pnc.event_date, child.event_date, adolescent.event_date) AS event_date,
+    coalesce(anc.team, pnc.team, child.team, adolescent.team) AS team,
+    coalesce(anc.location_id, pnc.location_id, child.location_id, adolescent.location_id) AS location_id,
+    coalesce(
+        anc.child_location_id,
+        pnc.child_location_id,
+        child.child_location_id,
+        adolescent.child_location_id
+    ) AS child_location_id,
+    coalesce(anc.provider_id, pnc.provider_id, child.provider_id, adolescent.provider_id) AS provider_id,
+    coalesce(anc.date_created, pnc.date_created, child.date_created, adolescent.date_created) AS date_created,
+    coalesce(anc.event_ids, pnc.event_ids, child.event_ids, adolescent.event_ids) AS event_ids,
     coalesce(child.addo_actions, adolescent.addo_actions) AS actions,
     coalesce(
         pnc.addo_medication_to_give,
@@ -64,7 +69,7 @@ SELECT
     coalesce(
         pnc.dispense_options, child.dispense_options, anc.dispense_options, adolescent.dispense_options
     ) AS dispense_options,
-    coalesce(pnc.encounter_type, child.encounter_type, anc.encounter_type) AS encounter_type,
+    coalesce(pnc.encounter_type, child.encounter_type, anc.encounter_type, adolescent.encounter_type) AS encounter_type,
     coalesce(pnc.end_time, child.end_time, anc.end_time, adolescent.end_time) AS end_time,
     coalesce(
         pnc.linkage_recommendation,
@@ -106,4 +111,4 @@ FULL JOIN {{ ref('addo_adolescent') }} AS adolescent
     ON anc.event_ids = adolescent.event_ids
 LEFT JOIN
     {{ source('location_data', 'openmrs_location_mapping_final') }} AS loc
-    ON loc.location_id = coalesce(anc.location_id, pnc.location_id, child.location_id)
+    ON loc.location_id = coalesce(anc.location_id, pnc.location_id, child.location_id, adolescent.location_id)
