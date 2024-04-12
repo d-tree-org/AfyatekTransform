@@ -4,7 +4,7 @@ WITH unnested_anc AS (
         ahvfm.event_date::date,
         ahvfm.client_type,
         ahvfm.ward_id,
-        ahvfm.warbase_entity_idd_name,
+        ahvfm.ward_name,
         ahvfm.district_id,
         ahvfm.district_name,
         unnest(string_to_array(ahvfm.medication_used_currently, '~')) AS medicines
