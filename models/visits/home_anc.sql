@@ -1,9 +1,9 @@
 {%- set fields = [ 
     {"name": "using_medication", "type": "boolean", "translate": "true"  },
     {"name": "medication_currently_using_anc", "type": "options","rename":"medication_used_currently"},
-    {"name": "source_medicine"},
-    {"name": "source_selection_medicine"},
-    {"name": "not_get_all_meds_reason"},
+    {"name": "source_medicine", "translate": "true"},
+    {"name": "source_selection_medicine", "translate": "true"},
+    {"name": "not_get_all_meds_reason", "translate": "true"},
     {"name": "not_get_all_meds_reason_other"},
     {"name": "expensive_medication_list"},
     {"name": "out_of_stock_medication_list"},

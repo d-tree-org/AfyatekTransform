@@ -19,7 +19,7 @@ LEFT JOIN translations.translations AS t2
         ahvfm.source_selection_medicine = t2.swahili
 WHERE
     ahvfm.event_date >= '2024-03-01'
-    AND ahvfm.source IS NOT null
+    AND ahvfm.source_medicine IS NOT null
 GROUP BY
     reason_for_selecting_addo,
     source_of_meds,
