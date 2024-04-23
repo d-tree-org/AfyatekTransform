@@ -111,4 +111,4 @@ FULL JOIN {{ ref('addo_adolescent') }} AS adolescent
     ON anc.event_ids = adolescent.event_ids
 LEFT JOIN
     {{ source('location_data', 'openmrs_location_mapping_final') }} AS loc
-    ON loc.location_id = coalesce(anc.location_id, pnc.location_id, child.location_id, adolescent.location_id)
+    ON loc.ward_id = coalesce(anc.location_id, pnc.location_id, child.location_id, adolescent.location_id)
