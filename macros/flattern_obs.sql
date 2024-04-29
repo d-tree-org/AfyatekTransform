@@ -1,6 +1,5 @@
 {%- macro flattern_obs(table_name,fields) %}
-    {%- set columns=['base_entity_id','event_date','team','child_location_id','location_id','provider_id',
-    'date_created'] -%}
+    {%- set columns=['base_entity_id','event_date','team','child_location_id','location_id','provider_id'] -%}
 WITH translation AS (
     SELECT json_object_agg(lower(swahili), english) AS "get" FROM translations.addo
 ),
