@@ -2,11 +2,11 @@
     materialized="materialized_view",
     on_configuration_change="apply",
     indexes=[{
-        "columns": ['location_id','ward_id','district_id','ward_name','district_name','event_date','base_entity_id','provider_id'],
+        "columns": ['location_id','ward_id','district_id','ward_name','district_name','event_date','base_entity_id','provider_id','client_type'],
             "unique": false, 'type': 'btree' }]
 ) -}}
 
-SELECT
+SELECT DISTINCT
     loc.ward_id,
     loc.ward_name,
     loc.district_id,
