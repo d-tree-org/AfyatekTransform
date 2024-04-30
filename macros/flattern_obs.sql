@@ -10,6 +10,7 @@ value_cte AS(
         tb.{{ column ~ ('::DATE' if 'date' in column ) }},
     {%- endfor %}
         tb.id,
+        tb.date_created,
         coalesce( obs._value -> 'humanReadableValues' ->> 0, obs._value -> 'values' ->> 0) AS _val,
         obs._value ->> 'formSubmissionField' AS _col 
     FROM {{ source('afyatek_data', table_name) }} AS tb,
@@ -23,6 +24,7 @@ SELECT
         {{ obs_column(field) }}
     {%- endfor %}
     {{ '\tobs.' ~ ',\n\tobs.'.join(columns) }},
+    max(obs.date_created) as date_created,
     array_agg(distinct obs.id) AS event_ids
 FROM value_cte AS obs
     INNER JOIN translation AS dict ON TRUE
