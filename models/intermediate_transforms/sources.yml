@@ -22,3 +22,5 @@ sources:
         description: "Child Home Visits event data"
       - name: referral_follow_up_visit
         description: "Child Home Visits event data"
+      - name: adolescent_home_visit
+        description: "Adolescent Home visits event data"
