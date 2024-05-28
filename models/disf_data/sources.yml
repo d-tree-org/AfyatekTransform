@@ -1,10 +1,10 @@
 version: 2
 
 sources:
-  - name: afyatek_data
+  - name: location_data
     description: "Raw data from the ETL"
     database: afyatekdb
     schema: public
     tables:
-      - name: anc_addo_visit
-        description: "ANC Addo patients resources."
+      - name: openmrs_location_mapping_final
+        description: "Location data for CHWs."

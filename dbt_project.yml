@@ -33,10 +33,19 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   AfyatekTransform:
     # Config indicated by + and applies to all files under models/example/
-    afyatek_transforms:
+    intermediate_transforms:
+      +schema: intermediate_transforms
       +materialized: materialized_view
-    afyatek_flattened_mats:
+    flat_mats:
+      +schema: flat_mats
       +materialized: materialized_view
       +indexes:
-        - columns: ['base_entity_id']
+        - columns: ['base_entity_id','event_date','location_id','provider_id','date_created']
           type: btree
+    visits:
+      +schema: visits
+      +materialized: materialized_view
+      +on_configuration_change: apply
+    disf_data:
+      +schema: disf_data
+      +materialized: materialized_view
