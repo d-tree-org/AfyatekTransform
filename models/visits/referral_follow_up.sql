@@ -11,7 +11,8 @@
     {"name": "novisit_reason"},
     {"name": "other_reason_novisit"},
     {"name": "encourage_toaster"},
-    {"name": "complete_referral"}
+    {"name": "complete_referral"},
+    {"name": "gps", "type": "gps", "rename":"location_point"}
 ] 
 -%}
 {{- flattern_obs('referral_follow_up_visit',fields) }}
