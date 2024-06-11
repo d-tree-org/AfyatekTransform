@@ -36,7 +36,8 @@
         ,"translate":"true"
         ,"type": "options"
     }, 
-    {"name": "encounter_type", "type":"options" }
+    {"name": "encounter_type", "type":"options" },
+    {"name": "gps", "type": "gps", "rename":"location_point"}
     ] 
 -%}
 {{- flattern_obs('child_addo_visit',fields) -}}

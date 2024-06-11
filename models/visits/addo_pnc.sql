@@ -33,7 +33,8 @@
   { "name": "simserial" },
   { "name": "subscriberid" },
   { "name": "service_provider" },
-  { "name": "encounter_type", "type": "options" }
+  { "name": "encounter_type", "type": "options" },
+  {"name": "gps", "type": "gps", "rename":"location_point"}
 ]
   -%}
 {{- flattern_obs('pnc_addo_visit',fields) -}}
