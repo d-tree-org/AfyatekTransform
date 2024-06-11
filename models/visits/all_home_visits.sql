@@ -61,6 +61,9 @@ SELECT
         adsc.other_reason_medication_list
     ) AS other_reason_medication_list,
     coalesce(anc.get_all_meds, pnc.get_all_meds, child.get_all_meds, adsc.get_all_meds) AS get_all_meds,
+    coalesce(anc.latitude, pnc.latitude, child.latitude, adsc.latitude) AS latitude,
+    coalesce(anc.longitude, pnc.longitude, child.longitude, adsc.longitude) AS longitude,
+    coalesce(anc.location_point, pnc.location_point, child.location_point, adsc.location_point) AS location_point,
     CASE
         WHEN child.source_medicine = 'health_facility' THEN child.source_selection_reason_hf
         WHEN child.source_medicine = 'addo' THEN child.source_selection_reason_addo
