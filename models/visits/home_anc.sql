@@ -28,7 +28,8 @@
     {"name": "chw_comment_anc"},
     {"name": "fam_planning"},
     {"name": "llin_given"},
-    {"name": "danger_signs_counseling"}
+    {"name": "danger_signs_counseling"},
+    {"name": "gps", "type": "gps", "rename":"location_point"}
 ] 
 -%}
 {{- flattern_obs('anc_home_visit',fields) }}

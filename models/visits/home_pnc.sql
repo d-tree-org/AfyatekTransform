@@ -38,7 +38,8 @@
   {"name": "nutrition_status_mama"},
   {"name": "last_health_facility_visit_date"},
   {"name": "save_n_refer"},
-  {"name": "save_n_link"}
+  {"name": "save_n_link"},
+  {"name": "gps", "type": "gps", "rename":"location_point"}
 ] 
 -%}
 {{- flattern_obs('pnc_home_visit',fields) }}

@@ -11,9 +11,17 @@
             )) " if field.translate else
             "max(array_remove(regexp_split_to_array(obs._val,'(\s*(<[^>]+>\s*)|\s*u2022\s*)'),'')) ",
         'else': 'max({column}) '} -%}
-
-    {{- kinds.get(field.type).format(column=column) if field.type in kinds
-        else kinds.get('else').format(column=column) -}}
-    FILTER (WHERE obs._col = '{{ field.name }}') {{- casting ~ ' ' -}} 
-    AS {{ field.rename if 'rename' in field else field.name }},
+    {%- if field.type == 'gps' -%}
+        max(cast(split_part({{ column }}, ' ', 1) as double precision)) FILTER (WHERE obs._col = '{{ field.name }}') AS latitude,
+        max(cast(split_part({{ column }}, ' ', 2) as double precision)) FILTER (WHERE obs._col = '{{ field.name }}') AS longitude,
+        ST_SetSRID(ST_MakePoint(
+            max(cast(split_part({{ column }}, ' ', 2) as double precision)) FILTER (WHERE obs._col = '{{ field.name }}'),
+            max(cast(split_part({{ column }}, ' ', 1) as double precision)) FILTER (WHERE obs._col = '{{ field.name }}')
+        ), 4326) AS {{ field.rename if 'rename' in field else field.name }},
+    {%- else -%}
+        {{- kinds.get(field.type).format(column=column) if field.type in kinds
+            else kinds.get('else').format(column=column) -}}
+        FILTER (WHERE obs._col = '{{ field.name }}') {{- casting ~ ' ' -}} 
+        AS {{ field.rename if 'rename' in field else field.name }},
+    {%- endif -%}
 {%- endmacro %}

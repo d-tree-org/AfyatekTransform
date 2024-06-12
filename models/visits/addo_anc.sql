@@ -33,6 +33,7 @@
     {"name": "addo_medication_to_give","translate":"true", "type":"tag_delimited" },
     {"name": "addo_visit_date" },
     {"name": "linkage_recommendation" },
-    {"name": "encounter_type","type":"options" }
+    {"name": "encounter_type","type":"options" },
+    {"name": "gps", "type": "gps", "rename":"location_point"}
 ] -%}
 {{- flattern_obs('anc_addo_visit',fields) }}
