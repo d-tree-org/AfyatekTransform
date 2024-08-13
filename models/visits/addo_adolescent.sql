@@ -40,7 +40,8 @@
         "translate":"true",
         "type":"options"
     },
-    {"name": "encounter_type","type":"options" }
+    {"name": "encounter_type","type":"options" },
+    {"name": "gps", "type": "gps", "rename":"location_point"}
     ] 
  -%}
 {{- flattern_obs('adolescent_addo_visit',fields) -}}

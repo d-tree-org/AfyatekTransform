@@ -22,7 +22,8 @@
         {"name": "not_get_all_meds_reason_other"},
         {"name": "expensive_medication_list"},
         {"name": "out_of_stock_medication_list"},
-        {"name": "other_reason_medication_list"}
+        {"name": "other_reason_medication_list"},
+        {"name": "gps", "type": "gps", "rename":"location_point"}
     ] 
 %}
 {{- flattern_obs('child_home_visit',fields) -}}

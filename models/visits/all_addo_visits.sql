@@ -90,6 +90,9 @@ SELECT DISTINCT
     ) AS referral_status,
     coalesce(pnc.save_n_refer, child.save_n_refer, anc.save_n_refer, adolescent.save_n_refer) AS save_n_refer,
     coalesce(pnc.select_facility, anc.select_facility) AS select_facility,
+    coalesce(pnc.latitude, anc.latitude, child.latitude, adolescent.latitude) AS latitude,
+    coalesce(pnc.longitude, anc.longitude, child.longitude, adolescent.longitude) AS longitude,
+    coalesce(pnc.location_point, anc.location_point, child.location_point, adolescent.location_point) AS location_point,
     coalesce(
         pnc.service_provider, child.service_provider, anc.service_provider, adolescent.service_provider
     ) AS service_provider,
