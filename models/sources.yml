@@ -6,6 +6,8 @@ sources:
     database: afyatekdb_production
     schema: public
     tables:
+      - name: openmrs_location_mapping_final
+        description: "Location data for CHWs."
       - name: anc_addo_visit
         description: "ANC Addo patients resources."
       - name: pnc_addo_visit
@@ -30,3 +32,9 @@ sources:
         description: "Family member registration event data"
       - name: child_registration
         description: "Child registration event data"
+      - name: adolescent_registration
+        description: "Adolescent registration event data"
+      - name: openmrs_user_mapping_final
+        description: "CHw details from openmrs"
+      - name: chw_phone_numbers
+        description: "CHw Phone numbers from csv"

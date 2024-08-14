@@ -95,5 +95,5 @@ FULL JOIN {{ ref('referral_follow_up') }} AS referral
 FULL JOIN {{ ref('linkage_follow_up') }} AS linkage
     ON anc.event_ids = linkage.event_ids
 LEFT JOIN
-    {{ source('location_data', 'openmrs_location_mapping_final') }} AS loc
+    {{ source('afyatek_data', 'openmrs_location_mapping_final') }} AS loc
     ON loc.location_id = coalesce(anc.location_id, pnc.location_id, child.location_id, adsc.location_id)

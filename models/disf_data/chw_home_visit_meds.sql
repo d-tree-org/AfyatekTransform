@@ -88,5 +88,5 @@ SELECT
     ld.district_name
 FROM chw_combined_meds
 LEFT JOIN
-    {{ source('location_data', 'openmrs_location_mapping_final') }} AS ld
+    {{ source('afyatek_data', 'openmrs_location_mapping_final') }} AS ld
     ON chw_combined_meds.location_id = ld.location_id
