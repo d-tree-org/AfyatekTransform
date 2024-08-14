@@ -25,4 +25,8 @@ sources:
       - name: linkage_follow_up_visit
         description: "Child Home Visits event datail"
       - name: adolescent_home_visit
-        description: "Child Home Visits event datail"
+        description: "Adolescent Home visits event data"
+      - name: family_member_registration
+        description: "Family member registration event data"
+      - name: child_registration
+        description: "Child registration event data"
