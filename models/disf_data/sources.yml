@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: location_data
     description: "Raw data from the ETL"
-    database: afyatekdb
+    database: afyatekdb_production
     schema: public
     tables:
       - name: openmrs_location_mapping_final

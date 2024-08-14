@@ -10,4 +10,4 @@
     {"name": "gps", "type": "gps", "rename":"location_point"}
 ] 
 -%}
-{{- flattern_obs('referral_follow_up_visit',fields) }}
+{{- flattern_obs('linkage_follow_up_visit',fields) }}

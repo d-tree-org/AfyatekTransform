@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: afyatek_data
     description: "Raw data from the ETL"
-    database: afyatekdb
+    database: afyatekdb_production
     schema: public
     tables:
       - name: anc_addo_visit
@@ -21,6 +21,8 @@ sources:
       - name: child_home_visit
         description: "Child Home Visits event data"
       - name: referral_follow_up_visit
-        description: "Child Home Visits event data"
+        description: "Child Home Visits event datail"
+      - name: linkage_follow_up_visit
+        description: "Child Home Visits event datail"
       - name: adolescent_home_visit
-        description: "Adolescent Home visits event data"
+        description: "Child Home Visits event datail"

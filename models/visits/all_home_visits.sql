@@ -11,17 +11,17 @@ SELECT
     loc.ward_name,
     loc.district_id,
     loc.district_name,
-    coalesce(anc.base_entity_id, pnc.base_entity_id, child.base_entity_id, adsc.base_entity_id) AS base_entity_id,
-    coalesce(anc.event_date, pnc.event_date, child.event_date, adsc.event_date) AS event_date,
-    coalesce(anc.team, pnc.team, child.team, adsc.team) AS team,
-    coalesce(anc.location_id, pnc.location_id, child.location_id, adsc.location_id) AS location_id,
+    coalesce(linkage.base_entity_id,referral.base_entity_id,anc.base_entity_id, pnc.base_entity_id, child.base_entity_id, adsc.base_entity_id) AS base_entity_id,
+    coalesce(anc.event_date,linkage.event_date,referral.event_date, pnc.event_date, child.event_date, adsc.event_date) AS event_date,
+    coalesce(anc.team,linkage.team,referral.team, pnc.team, child.team, adsc.team) AS team,
+    coalesce(anc.location_id,linkage.location_id,referral.location_id, pnc.location_id, child.location_id, adsc.location_id) AS location_id,
     coalesce(
-        anc.child_location_id, pnc.child_location_id, child.child_location_id, adsc.child_location_id
+        linkage.child_location_id,referral.child_location_id,anc.child_location_id, pnc.child_location_id, child.child_location_id, adsc.child_location_id
     ) AS child_location_id,
-    coalesce(anc.provider_id, pnc.provider_id, child.provider_id, adsc.provider_id) AS provider_id,
-    coalesce(anc.date_created, pnc.date_created, child.date_created, adsc.date_created) AS date_created,
+    coalesce(anc.provider_id,linkage.provider_id,referral.provider_id, pnc.provider_id, child.provider_id, adsc.provider_id) AS provider_id,
+    coalesce(anc.date_created,linkage.date_created,referral.date_created, pnc.date_created, child.date_created, adsc.date_created) AS date_created,
     coalesce(
-        anc.using_medication, pnc.using_medication, child.using_medication, adsc.using_medication
+       pnc.using_medication,anc.using_medication, child.using_medication, adsc.using_medication
     ) AS using_medication,
     coalesce(
         anc.medication_used_currently,
@@ -78,8 +78,10 @@ SELECT
         WHEN pnc.base_entity_id IS NOT null THEN 'pnc'
         WHEN child.base_entity_id IS NOT null THEN 'child'
         WHEN adsc.base_entity_id IS NOT null THEN 'adolescent'
+        WHEN linkage.base_entity_id IS NOT null THEN 'linkage'
+        WHEN referral.base_entity_id IS NOT null THEN 'referral'
     END AS client_type,
-    coalesce(anc.event_ids, pnc.event_ids, child.event_ids, adsc.event_ids) AS event_ids
+    coalesce(anc.event_ids, pnc.event_ids, child.event_ids, adsc.event_ids,linkage.event_ids,referral.event_ids) AS event_ids
 
 FROM {{ ref('home_anc') }} AS anc
 FULL JOIN {{ ref('home_pnc') }} AS pnc
@@ -88,6 +90,10 @@ FULL JOIN {{ ref('home_child') }} AS child
     ON anc.event_ids = child.event_ids
 FULL JOIN {{ ref('home_adolescent') }} AS adsc
     ON anc.event_ids = adsc.event_ids
+FULL JOIN {{ ref('referral_follow_up') }} AS referral
+    ON anc.event_ids = referral.event_ids
+FULL JOIN {{ ref('linkage_follow_up') }} AS linkage
+    ON anc.event_ids = linkage.event_ids
 LEFT JOIN
     {{ source('location_data', 'openmrs_location_mapping_final') }} AS loc
     ON loc.location_id = coalesce(anc.location_id, pnc.location_id, child.location_id, adsc.location_id)
