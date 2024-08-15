@@ -1,6 +1,6 @@
 {%- set fields = [
     {"name": "start", "type": "timestamp","rename":"start_time"},
-    {"name": "end", "type": "timestamp","rename":"start_time"},
+    {"name": "end", "type": "timestamp","rename":"end_time"},
     {"name": "deviceid"},
     {"name": "simserial"},
     {"name": "subscriberid"},
