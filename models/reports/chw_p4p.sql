@@ -26,7 +26,7 @@ SELECT
     v_breakdown.percentage,
     v_breakdown.amount
 FROM {{ ref("chw_details") }} AS chw
-LEFT JOIN {{ ref("chw_perfomance") }} AS perfomance
+LEFT JOIN {{ ref("chw_performance") }} AS perfomance
     ON chw.provider_id = perfomance.provider_id
 LEFT JOIN breakdown AS v_breakdown
     ON perfomance.visits BETWEEN v_breakdown.low AND v_breakdown.up
