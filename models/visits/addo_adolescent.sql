@@ -31,7 +31,6 @@
     {"name": "addo_visit_date"},
     {"name": "adolescent_condition_present"},
     {"name": "linkage_recommendation"},
-
     { "name":"no_medicine_selected"},
     { "name":"medication_description"},
     { "name":"not_dispensed_meds","type":"options"},

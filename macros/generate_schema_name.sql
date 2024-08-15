@@ -4,7 +4,7 @@
     {%- if custom_schema_name is none -%}
         {{ default_schema }}
 
-    {%- elif custom_schema_name=='visits' -%}
+    {%- elif custom_schema_name in ['visits','registrations','reports'] -%}
         {{ custom_schema_name | trim }}
 
     {%- else -%}

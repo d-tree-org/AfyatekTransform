@@ -34,6 +34,7 @@ SELECT
     CASE
         WHEN child.base_entity_id IS NOT null THEN 'child'
         WHEN member.base_entity_id IS NOT null THEN 'member'
+        WHEN adolescent.base_entity_id IS NOT null THEN 'adolescent'
     END AS client_type,
     coalesce(child.event_ids, member.event_ids, adolescent.event_ids) AS event_ids
 
