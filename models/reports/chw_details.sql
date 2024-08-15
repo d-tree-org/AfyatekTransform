@@ -3,8 +3,7 @@ SELECT
     chw.given_name || ' ' || chw.family_name AS "name",
     chw.*,
     phone.phone_number,
-    phone,
-    network,
+    phone.network,
     loc.district_name,
     loc.village_name
 

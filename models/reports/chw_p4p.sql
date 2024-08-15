@@ -16,11 +16,19 @@ WITH breakdown(
 )
 
 SELECT
+    chw.provider_id,
+    chw."name",
+    chw.phone_number,
+    chw.network,
+    chw.district_name,
+    chw.village_name,
     chv_performance.*,
     v_breakdown.percentage,
     v_breakdown.amount
-FROM {{ ref("chv_performance") }}
+FROM {{ ref("chw_details") }} AS chw
+LEFT JOIN {{ ref("chw_perfomance") }} as perfomance
+    ON chw.provider_id=perfomance.provider_id
 LEFT JOIN breakdown AS v_breakdown
-    ON chv_performance.visits BETWEEN v_breakdown.low AND v_breakdown.up
+    ON perfomance.visits BETWEEN v_breakdown.low AND v_breakdown.up
 LEFT JOIN breakdown AS r_breakdown
-    ON chv_performance.registration BETWEEN r_breakdown.low AND r_breakdown.up
+    ON perfomance.registration BETWEEN r_breakdown.low AND r_breakdown.up
