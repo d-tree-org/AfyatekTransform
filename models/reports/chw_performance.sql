@@ -17,6 +17,6 @@ registration AS (
 )
 
 SELECT *
-FROM  visits 
+FROM visits 
 FULL JOIN  registration 
     USING (provider_id, reported_week)
