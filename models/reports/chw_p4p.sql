@@ -19,8 +19,9 @@ SELECT
     performance.registrations,
     performance.registration_targed_reached,
     r_breakdown.amount AS registration_amount,
-    r_breakdown.amount + v_breakdown.amount AS total_amount,
-    performance.reported_week
+    performance.reported_week,
+    coalesce(r_breakdown.amount, 0)
+    + coalesce(v_breakdown.amount, 0) AS total_amount
 FROM {{ ref("chw_details") }} AS chw
 LEFT JOIN {{ ref("chw_performance") }} AS performance
     ON chw.provider_id = performance.provider_id
@@ -31,4 +32,4 @@ LEFT JOIN {{ ref("p4p_breakdown") }} AS v_breakdown
 LEFT JOIN {{ ref("p4p_breakdown") }} AS r_breakdown
     ON performance.registrations BETWEEN r_breakdown.lower_limit
         AND r_breakdown.upper_limit
-        AND v_breakdown.category = 'registration'
+        AND r_breakdown.category = 'registration'
