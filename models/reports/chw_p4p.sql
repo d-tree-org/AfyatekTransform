@@ -2,7 +2,7 @@
     materialized="materialized_view",
     on_configuration_change="apply",
     indexes=[{
-        "columns": ['provider_id','phone_number','location_id','reported_week'],
+        "columns": ['provider_id','phone_number','location_id','reported_month'],
             "unique": true, 'type': 'btree' }]
 ) -}}
 SELECT
@@ -19,7 +19,7 @@ SELECT
     performance.registrations,
     performance.registration_targed_reached,
     r_breakdown.amount AS registration_amount,
-    performance.reported_week,
+    performance.reported_month,
     coalesce(r_breakdown.amount, 0)
     + coalesce(v_breakdown.amount, 0) AS total_amount
 FROM {{ ref("chw_details") }} AS chw
