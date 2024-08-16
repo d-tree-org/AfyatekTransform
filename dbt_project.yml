@@ -58,7 +58,7 @@ models:
       +schema: reports
       +materialized: materialized_view
       +indexes:
-        - columns: ['base_entity_id','event_date','team','child_location_id','location_id','provider_id']
+        - columns: ['provider_id','location_id']
           type: btree
     disf_data:
       +schema: disf_data

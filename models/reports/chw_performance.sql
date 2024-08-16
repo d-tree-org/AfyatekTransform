@@ -1,3 +1,10 @@
+{{- config(
+    materialized="materialized_view",
+    on_configuration_change="apply",
+    indexes=[{
+        "columns": ['provider_id','visits','registrations','reported_week'],
+            "unique": true, 'type': 'btree' }]
+) -}}
 WITH visits AS (
     SELECT
         provider_id,
@@ -11,7 +18,7 @@ registrations AS (
     SELECT
         provider_id,
         count(*) AS registrations,
-        date_trunc('month', event_date) AS reported_week
+        date_trunc('week', event_date) AS reported_week
     FROM {{ ref("all_registration") }}
     GROUP BY provider_id, reported_week
 )
@@ -33,7 +40,6 @@ LEFT JOIN {{ ref("p4p_breakdown") }} AS v_breakdown
         AND v_breakdown.upper_limit
         AND v_breakdown.category = 'visit'
 LEFT JOIN {{ ref("p4p_breakdown") }} AS r_breakdown
-    ON
-        registrations.registrations BETWEEN v_breakdown.lower_limit
+    ON registrations.registrations BETWEEN r_breakdown.lower_limit
         AND r_breakdown.upper_limit
-        AND v_breakdown.category = 'registration'
+        AND r_breakdown.category = 'registration'

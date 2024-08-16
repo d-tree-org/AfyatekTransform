@@ -22,4 +22,4 @@ WITH p4p_breakdown(achieved, lower_limit, upper_limit, amount, category) AS (
     ('0.00%', 0, 9, 0, 'visit')
 )
 
-SELECT * FROM p4p_breakdown;
+SELECT * FROM p4p_breakdown
